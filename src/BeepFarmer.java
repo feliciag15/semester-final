@@ -8,6 +8,16 @@ public class BeepFarmer extends Farmer {
 
 	//  TODO Add one or more constructors, as needed
 	
+	public BeepFarmer() {
+		
+		super (1, 1, 0);
+	}
+	
+	public BeepFarmer(int x, int y, int z) {
+		
+		super (x, y, z);
+	}
+	
 	/**
 	 * Access all locations in a rectangular garden and pick up any beepers found
 	 * 
@@ -20,6 +30,36 @@ public class BeepFarmer extends Farmer {
 	 */
 	public void reap(int width, int height) {
 		// TODO You implement this
+		
+		teleport(3, 5);
+		int r = this.getX();
+		int c = this.getY();
+		
+		for (int i= 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				
+				while(nextToABeeper()) {
+					
+					pickBeeper();
+				}
+				teleport(r+i, c+j);
+				
+			}
+			
+			pickBeeper();
+			
+			
+		}
+		
+		teleport(1, 1);
+		int numBeepers = getBeepers();
+		for (int b = 0; b < numBeepers; b++) {
+			
+			putBeeper();
+		}
+		turnRight();
+		move();
+		
 	}
 	
 	/**
